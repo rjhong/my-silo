@@ -26,13 +26,14 @@
       padding-bottom: 4rem;
     }
     .hero {
-      background: linear-gradient(135deg, #0077b6 0%, #00b4d8 100%);
+      background: linear-gradient(135deg, rgba(0,119,182,0.85) 0%, rgba(0,180,216,0.85) 100%),
+        url('images/hero-bg.jpg') center/cover;
       color: white;
-      padding: 3rem 1.5rem;
+      padding: 4rem 1.5rem;
       text-align: center;
     }
-    .hero h1 { font-size: 2rem; margin-bottom: 0.5rem; }
-    .hero p { opacity: 0.9; font-size: 1.1rem; }
+    .hero h1 { font-size: 2.2rem; margin-bottom: 0.5rem; text-shadow: 0 2px 4px rgba(0,0,0,0.2); }
+    .hero p { opacity: 0.95; font-size: 1.15rem; }
     .container { max-width: 900px; margin: 0 auto; padding: 1.5rem; }
     .info-section { margin-top: 2rem; }
     .info-section h2 {
@@ -54,20 +55,57 @@
       margin-bottom: 0.5rem;
       font-size: 1.1rem;
     }
+    .card-photo {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 0.75rem;
+    }
+    .day-card { margin-top: 2.5rem; border-radius: 12px; overflow: hidden; box-shadow: var(--shadow); }
+    .day-photo {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      display: block;
+    }
     .day-header {
       background: linear-gradient(135deg, #0077b6 0%, #00b4d8 100%);
       color: white;
-      border-radius: 12px 12px 0 0;
       padding: 1rem 1.5rem;
-      margin-top: 2.5rem;
     }
     .day-header h2 { font-size: 1.3rem; border: none; padding: 0; margin: 0; color: white; }
     .day-header .hotel { opacity: 0.9; font-size: 0.9rem; margin-top: 0.25rem; }
     .day-body {
       background: var(--card-bg);
       border-radius: 0 0 12px 12px;
-      box-shadow: var(--shadow);
       padding: 1.5rem;
+    }
+    .spot-gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 0.5rem;
+      margin-top: 1rem;
+      margin-bottom: 0.5rem;
+    }
+    .spot-gallery figure {
+      margin: 0;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+    }
+    .spot-gallery img {
+      width: 100%;
+      height: 90px;
+      object-fit: cover;
+      display: block;
+    }
+    .spot-gallery figcaption {
+      font-size: 0.75rem;
+      padding: 0.3rem 0.4rem;
+      text-align: center;
+      color: var(--text-muted);
+      background: var(--card-bg);
     }
     .timeline { list-style: none; position: relative; padding-left: 1.5rem; }
     .timeline::before {
@@ -189,9 +227,38 @@
       background: var(--primary);
       color: white;
     }
+    .today-banner {
+      display: none;
+      background: var(--accent);
+      color: white;
+      text-align: center;
+      padding: 0.6rem 1rem;
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    }
+    .today-banner.visible { display: block; }
+    .day-card.today { box-shadow: 0 0 0 3px var(--accent), var(--shadow); }
+    .day-card.today .day-header { background: linear-gradient(135deg, #f77f00 0%, #fcbf49 100%); }
+    .nearest-spot {
+      display: none;
+      background: #e8f4fd;
+      border-left: 4px solid var(--primary);
+      padding: 0.5rem 1rem;
+      border-radius: 0 8px 8px 0;
+      margin-top: 0.75rem;
+      font-size: 0.9rem;
+    }
+    .nearest-spot.visible { display: block; }
     @media (max-width: 600px) {
+      .hero { padding: 3rem 1rem; }
       .hero h1 { font-size: 1.5rem; }
       .container { padding: 1rem; }
+      .day-photo { height: 140px; }
       table { font-size: 0.85rem; }
       th, td { padding: 0.4rem; }
     }
@@ -220,6 +287,8 @@
   <a href="#tips">提醒</a>
 </nav>
 
+<div id="today-banner" class="today-banner"></div>
+
 <div class="container">
 
   <!-- 基本資訊 -->
@@ -228,6 +297,7 @@
 
     <div class="card">
       <h3>航班</h3>
+      <img class="card-photo" src="images/spot-starlux.jpg" alt="星宇航空 A321neo">
       <table>
         <tr><th>航班</th><th>路線</th><th>出發</th><th>抵達</th><th>飛行</th></tr>
         <tr><td><strong>JX 870</strong>（星宇）</td><td>TPE → OKA</td><td>12:00 (UTC+8)</td><td>14:40 (UTC+9)</td><td>1h40m</td></tr>
@@ -238,6 +308,10 @@
 
     <div class="card">
       <h3>住宿</h3>
+      <div class="spot-gallery">
+        <figure><img src="images/spot-nest.jpg" alt="Nest Hotel Naha"><figcaption>Nest Hotel 那霸</figcaption></figure>
+        <figure><img src="images/spot-monterey.jpg" alt="Hotel Monterey Okinawa"><figcaption>Hotel Monterey</figcaption></figure>
+      </div>
       <table>
         <tr><th>飯店</th><th>日期</th><th>費用</th><th>地圖</th></tr>
         <tr><td>Nest Hotel Naha Kumoji</td><td>7/18-21（3晚）</td><td>TWD 33,730</td><td><a href="https://www.google.com/maps/search/?api=1&query=ネストホテル那覇久茂地" target="_blank">📍</a></td></tr>
@@ -264,7 +338,8 @@
   </section>
 
   <!-- Day 1 -->
-  <div id="day1">
+  <div id="day1" class="day-card">
+    <img class="day-photo" src="images/day1-kokusaidori.jpg" alt="國際通">
     <div class="day-header">
       <h2>Day 1（7/18 週六）抵達那霸</h2>
       <div class="hotel">住：Nest Hotel Naha Kumoji</div>
@@ -278,13 +353,19 @@
         <li><span class="time">18:00</span><span class="activity"><strong>國際通＋牧志市場</strong>（1樓買海鮮2樓代煮）</span><span class="drive">步行</span><a href="https://www.google.com/maps/search/?api=1&query=牧志公設市場" target="_blank">📍</a></li>
         <li><span class="time">20:00</span><span class="activity">Blue Seal冰淇淋</span><a href="https://www.google.com/maps/search/?api=1&query=ブルーシール+国際通り店" target="_blank">📍</a></li>
       </ul>
+      <div class="spot-gallery">
+        <figure><img src="images/spot-dmm.jpg" alt="DMMかりゆし水族館"><figcaption>DMM水族館</figcaption></figure>
+        <figure><img src="images/spot-market.jpg" alt="牧志市場"><figcaption>牧志市場</figcaption></figure>
+        <figure><img src="images/spot-blueseal.jpg" alt="Blue Seal"><figcaption>Blue Seal</figcaption></figure>
+      </div>
       <div class="route-summary"><strong>路線：</strong>租車店→DMM→飯店→國際通 ｜ <strong>行車：~19分</strong></div>
       <div class="backup">備案：<a href="https://www.google.com/maps/search/?api=1&query=ジャッキーステーキハウス+那覇" target="_blank">ジャッキーステーキハウス</a>（1953年牛排）</div>
     </div>
   </div>
 
   <!-- Day 2 -->
-  <div id="day2">
+  <div id="day2" class="day-card">
+    <img class="day-photo" src="images/day2-shurijo.jpg" alt="首里城">
     <div class="day-header">
       <h2>Day 2（7/19 週日）首里城＋南部</h2>
       <div class="hotel">住：Nest Hotel Naha Kumoji</div>
@@ -298,13 +379,19 @@
         <li><span class="time">17:30</span><span class="activity">晚餐：iias美食街</span></li>
         <li><span class="time">18:30</span><span class="activity">回飯店</span><span class="drive">車15分</span></li>
       </ul>
+      <div class="spot-gallery">
+        <figure><img src="images/spot-shuri.jpg" alt="首里城"><figcaption>首里城</figcaption></figure>
+        <figure><img src="images/spot-soba.jpg" alt="沖繩麵"><figcaption>沖繩麵</figcaption></figure>
+        <figure><img src="images/spot-cave.jpg" alt="鐘乳石洞"><figcaption>鐘乳石洞</figcaption></figure>
+      </div>
       <div class="route-summary"><strong>路線：</strong>那霸→首里→西原→南部→豐崎→那霸（順時針）｜ <strong>行車：~80分</strong></div>
       <div class="backup">備案：<a href="https://www.google.com/maps/search/?api=1&query=琉球新麺+通堂+小禄本店" target="_blank">通堂拉麵</a>（回程順路）</div>
     </div>
   </div>
 
   <!-- Day 3 -->
-  <div id="day3">
+  <div id="day3" class="day-card">
+    <img class="day-photo" src="images/day3-americanvillage.jpg" alt="美國村">
     <div class="day-header">
       <h2>Day 3（7/20 週一）兒童王國＋美國村</h2>
       <div class="hotel">住：Nest Hotel Naha Kumoji</div>
@@ -317,13 +404,18 @@
         <li><span class="time">17:00</span><span class="activity">晚餐：<strong>北谷ダイニング ちゃぁぶー</strong>（阿古豬涮涮鍋）</span><span class="drive">車3分</span><a href="https://www.google.com/maps/search/?api=1&query=北谷ダイニング+ちゃぁぶー" target="_blank">📍</a></li>
         <li><span class="time">18:30</span><span class="activity">回飯店</span><span class="drive">車26分</span></li>
       </ul>
+      <div class="spot-gallery">
+        <figure><img src="images/spot-zoo.jpg" alt="兒童王國"><figcaption>兒童王國</figcaption></figure>
+        <figure><img src="images/day3-americanvillage.jpg" alt="美國村"><figcaption>美國村</figcaption></figure>
+      </div>
       <div class="route-summary"><strong>路線：</strong>那霸→沖繩市→AEON→北谷→那霸 ｜ <strong>行車：~71分</strong></div>
       <div class="backup">備案：<a href="https://www.google.com/maps/search/?api=1&query=Zhyvago+Coffee+Works+北谷" target="_blank">Zhyvago Coffee Works</a>（海景漢堡）/ <a href="https://www.google.com/maps/search/?api=1&query=ステーキハウス金松+北谷" target="_blank">ステーキハウス金松</a></div>
     </div>
   </div>
 
   <!-- Day 4 -->
-  <div id="day4">
+  <div id="day4" class="day-card">
+    <img class="day-photo" src="images/day4-beach.jpg" alt="恩納海灘">
     <div class="day-header">
       <h2>Day 4（7/21 週二）移動日・港川＋恩納度假</h2>
       <div class="hotel">住：Hotel Monterey Okinawa Spa & Resort</div>
@@ -337,13 +429,19 @@
         <li><span class="time">13:00</span><span class="activity"><strong>飯店泳池＋海灘＋兒童戲水區</strong></span></li>
         <li><span class="time">18:00</span><span class="activity">晚餐：<strong>ぎゅうとん合戦</strong>（海景燒肉＋夕陽）</span><span class="drive">步行1分</span><a href="https://www.google.com/maps/search/?api=1&query=ぎゅうとん合戦+恩納村" target="_blank">📍</a></li>
       </ul>
+      <div class="spot-gallery">
+        <figure><img src="images/spot-tart.jpg" alt="水果塔"><figcaption>oHacorte</figcaption></figure>
+        <figure><img src="images/spot-pool.jpg" alt="泳池"><figcaption>飯店海灘</figcaption></figure>
+        <figure><img src="images/spot-yakiniku.jpg" alt="燒肉"><figcaption>海景燒肉</figcaption></figure>
+      </div>
       <div class="route-summary"><strong>路線：</strong>那霸→港川→恩納（北上直線）｜ <strong>行車：~57分</strong></div>
       <div class="backup">備案：<a href="https://www.google.com/maps/search/?api=1&query=浜の家+恩納村" target="_blank">浜の家</a>（車1分）</div>
     </div>
   </div>
 
   <!-- Day 5 -->
-  <div id="day5">
+  <div id="day5" class="day-card">
+    <img class="day-photo" src="images/day5-aquarium.jpg" alt="美麗海水族館">
     <div class="day-header">
       <h2>Day 5（7/22 週三）美麗海水族館＋古宇利島</h2>
       <div class="hotel">住：Hotel Monterey Okinawa Spa & Resort</div>
@@ -359,15 +457,47 @@
         <li><span class="time">17:05</span><span class="activity">飯店泳池</span></li>
         <li><span class="time">18:30</span><span class="activity">晚餐：<strong>ぎゅうとん合戦</strong>（海景燒肉＋夕陽）</span><span class="drive">步行1分</span><a href="https://www.google.com/maps/search/?api=1&query=ぎゅうとん合戦+恩納村" target="_blank">📍</a></li>
       </ul>
+      <div class="spot-gallery">
+        <figure><img src="images/spot-churaumi.jpg" alt="水族館"><figcaption>美麗海水族館</figcaption></figure>
+        <figure><img src="images/spot-kouri.jpg" alt="古宇利島"><figcaption>古宇利大橋</figcaption></figure>
+        <figure><img src="images/spot-yakiniku.jpg" alt="燒肉"><figcaption>海景燒肉</figcaption></figure>
+      </div>
       <div class="route-summary"><strong>路線：</strong>恩納→水族館→古宇利→恩納（ㄇ字型）｜ <strong>行車：~164分</strong></div>
       <div class="backup">備案：<a href="https://www.google.com/maps/search/?api=1&query=浜の家+恩納村" target="_blank">浜の家</a>（車1分）</div>
     </div>
   </div>
 
   <!-- Day 6 -->
-  <div id="day6">
+  <div id="day6" class="day-card">
+    <img class="day-photo" src="images/day7-ocean.jpg" alt="海中公園">
     <div class="day-header">
-      <h2>Day 6（7/23 週四）DINO恐竜PARK＋鳳梨公園</h2>
+      <h2>Day 6（7/23 週四）海中公園＋琉球妖怪</h2>
+      <div class="hotel">住：Hotel Monterey Okinawa Spa & Resort</div>
+    </div>
+    <div class="day-body">
+      <ul class="timeline">
+        <li><span class="time">10:00</span><span class="activity"><strong>ブセナ海中公園</strong>（海中展望塔＋玻璃船）</span><span class="drive">車22分</span><a href="https://www.google.com/maps/search/?api=1&query=ブセナ海中公園" target="_blank">📍</a></li>
+        <li><span class="time">12:00</span><span class="activity">回飯店</span><span class="drive">車22分</span></li>
+        <li><span class="time">12:30</span><span class="activity">飯店午餐＋泳池＋海灘</span></li>
+        <li><span class="time">17:30</span><span class="activity"><strong>琉球妖怪 むら咲むら</strong>（投影、蓋章拉力、妖怪咖啡）</span><span class="drive">車16分</span><a href="https://www.google.com/maps/search/?api=1&query=体験王国むら咲むら" target="_blank">📍</a></li>
+        <li><span class="time">19:00</span><span class="activity">晚餐：園內妖怪咖啡</span></li>
+        <li><span class="time">20:30</span><span class="activity">回飯店</span><span class="drive">車16分</span></li>
+      </ul>
+      <div class="spot-gallery">
+        <figure><img src="images/spot-busena.jpg" alt="海中公園"><figcaption>海中公園</figcaption></figure>
+        <figure><img src="images/spot-pool.jpg" alt="飯店泳池"><figcaption>飯店泳池</figcaption></figure>
+      </div>
+      <div class="route-summary"><strong>路線：</strong>恩納→部瀨名→恩納→むら咲むら→恩納 ｜ <strong>行車：~76分</strong></div>
+      <div class="highlight-box">琉球妖怪：5/1–8/31，17:30–22:00（最終入場21:30）。幼兒免費，大人¥1,800</div>
+      <div class="backup">備案：<a href="https://www.google.com/maps/search/?api=1&query=浜の家+恩納村" target="_blank">浜の家</a>（車1分）/ <a href="https://www.google.com/maps/search/?api=1&query=ぎゅうとん合戦+恩納村" target="_blank">ぎゅうとん合戦</a>（步行1分）</div>
+    </div>
+  </div>
+
+  <!-- Day 7 -->
+  <div id="day7" class="day-card">
+    <img class="day-photo" src="images/day6-forest.jpg" alt="亞熱帶森林">
+    <div class="day-header">
+      <h2>Day 7（7/24 週五）DINO恐竜PARK＋鳳梨公園</h2>
       <div class="hotel">住：Hotel Monterey Okinawa Spa & Resort</div>
     </div>
     <div class="day-body">
@@ -377,37 +507,22 @@
         <li><span class="time">12:00</span><span class="activity"><strong>名護鳳梨公園</strong>（自動駕駛車遊園＋試吃鳳梨甜點）</span><span class="drive">車2分</span><a href="https://www.google.com/maps/search/?api=1&query=ナゴパイナップルパーク" target="_blank">📍</a></li>
         <li><span class="time">13:30</span><span class="activity">園內午餐（鳳梨料理）</span></li>
         <li><span class="time">14:00</span><span class="activity">回恩納（車上補眠）</span><span class="drive">車60分</span></li>
-        <li><span class="time">15:00</span><span class="activity"><strong>飯店泳池＋海灘</strong></span></li>
+        <li><span class="time">15:00</span><span class="activity"><strong>飯店泳池＋海灘</strong>（最後一個下午）</span></li>
         <li><span class="time">18:30</span><span class="activity">晚餐：<strong>浜の家</strong>（在地海鮮，CP值高）</span><span class="drive">車1分</span><a href="https://www.google.com/maps/search/?api=1&query=浜の家+恩納村" target="_blank">📍</a></li>
       </ul>
+      <div class="spot-gallery">
+        <figure><img src="images/spot-dino.jpg" alt="恐龍公園"><figcaption>DINO恐竜PARK</figcaption></figure>
+        <figure><img src="images/spot-pineapple.jpg" alt="鳳梨公園"><figcaption>鳳梨公園</figcaption></figure>
+        <figure><img src="images/spot-seafood.jpg" alt="海鮮"><figcaption>浜の家</figcaption></figure>
+      </div>
       <div class="route-summary"><strong>路線：</strong>恩納→名護（DINO＋鳳梨公園）→恩納 ｜ <strong>行車：~120分</strong></div>
       <div class="backup">備案：<a href="https://www.google.com/maps/search/?api=1&query=ぎゅうとん合戦+恩納村" target="_blank">ぎゅうとん合戦</a>（步行1分）</div>
     </div>
   </div>
 
-  <!-- Day 7 -->
-  <div id="day7">
-    <div class="day-header">
-      <h2>Day 7（7/24 週五）海中公園＋琉球妖怪</h2>
-      <div class="hotel">住：Hotel Monterey Okinawa Spa & Resort</div>
-    </div>
-    <div class="day-body">
-      <ul class="timeline">
-        <li><span class="time">10:00</span><span class="activity"><strong>ブセナ海中公園</strong>（海中展望塔＋玻璃船）</span><span class="drive">車22分</span><a href="https://www.google.com/maps/search/?api=1&query=ブセナ海中公園" target="_blank">📍</a></li>
-        <li><span class="time">12:00</span><span class="activity">回飯店</span><span class="drive">車22分</span></li>
-        <li><span class="time">12:30</span><span class="activity">飯店午餐＋泳池＋海灘（最後一個下午）</span></li>
-        <li><span class="time">17:30</span><span class="activity"><strong>琉球妖怪 むら咲むら</strong>（投影、蓋章拉力、妖怪咖啡）</span><span class="drive">車16分</span><a href="https://www.google.com/maps/search/?api=1&query=体験王国むら咲むら" target="_blank">📍</a></li>
-        <li><span class="time">19:00</span><span class="activity">晚餐：園內妖怪咖啡</span></li>
-        <li><span class="time">20:30</span><span class="activity">回飯店</span><span class="drive">車16分</span></li>
-      </ul>
-      <div class="route-summary"><strong>路線：</strong>恩納→部瀨名→恩納→むら咲むら→恩納 ｜ <strong>行車：~76分</strong></div>
-      <div class="highlight-box">琉球妖怪：5/1–8/31，17:30–22:00（最終入場21:30）。幼兒免費，大人¥1,800</div>
-      <div class="backup">備案：<a href="https://www.google.com/maps/search/?api=1&query=浜の家+恩納村" target="_blank">浜の家</a>（車1分）/ <a href="https://www.google.com/maps/search/?api=1&query=ぎゅうとん合戦+恩納村" target="_blank">ぎゅうとん合戦</a>（步行1分）</div>
-    </div>
-  </div>
-
   <!-- Day 8 -->
-  <div id="day8">
+  <div id="day8" class="day-card">
+    <img class="day-photo" src="images/day8-airport.jpg" alt="機場">
     <div class="day-header">
       <h2>Day 8（7/25 週六）還車＋機場購物</h2>
       <div class="hotel">⚠️ 還車期限12:00</div>
@@ -415,7 +530,7 @@
     <div class="day-body">
       <ul class="timeline">
         <li><span class="time">09:30</span><span class="activity">退房出發往南</span></li>
-        <li><span class="time">10:25</span><span class="activity">加滿油 → Toyota還車</span><span class="drive">車55分</span></li>
+        <li><span class="time">10:25</span><span class="activity">加滿油（<a href="https://www.google.com/maps/search/?api=1&query=ENEOS+那覇市赤嶺2丁目" target="_blank">ENEOS赤嶺📍</a>）→ <a href="https://www.google.com/maps/search/?api=1&query=トヨタレンタカー+那覇空港+赤嶺2丁目15-11" target="_blank">Toyota還車📍</a></span><span class="drive">車55分</span></li>
         <li><span class="time">11:00</span><span class="activity">搭接駁至機場國際線</span><span class="drive">接駁5分</span></li>
         <li><span class="time">11:15</span><span class="activity">機場午餐＋check-in＋DFS免稅店購物</span></li>
         <li><span class="time">15:50</span><span class="activity">JX 871 起飛</span></li>
@@ -436,8 +551,8 @@
         <tr><td>Day 3（7/20）</td><td>~71分</td><td>那霸→沖繩市→AEON→北谷→那霸</td></tr>
         <tr><td>Day 4（7/21）</td><td>~57分</td><td>那霸→港川→恩納</td></tr>
         <tr><td>Day 5（7/22）</td><td>~164分</td><td>恩納→水族館→古宇利→恩納</td></tr>
-        <tr><td>Day 6（7/23）</td><td>~120分</td><td>恩納→名護→恩納</td></tr>
-        <tr><td>Day 7（7/24）</td><td>~76分</td><td>恩納→部瀨名→むら咲むら→恩納</td></tr>
+        <tr><td>Day 6（7/23）</td><td>~76分</td><td>恩納→部瀨名→むら咲むら→恩納</td></tr>
+        <tr><td>Day 7（7/24）</td><td>~120分</td><td>恩納→名護→恩納</td></tr>
         <tr><td>Day 8（7/25）</td><td>~55分</td><td>恩納→加油→還車→機場</td></tr>
       </table>
     </div>
@@ -459,9 +574,9 @@
         <tr><td>ぎゅうとん合戦</td><td>4</td><td>晚</td><td>海景燒肉＋夕陽</td><td><a href="https://www.google.com/maps/search/?api=1&query=ぎゅうとん合戦+恩納村" target="_blank">📍</a></td><td><a href="https://tabelog.com/okinawa/A4703/A470303/47013003/" target="_blank">Tabelog</a></td></tr>
         <tr><td>Cafe Ocean Blue</td><td>5</td><td>午</td><td>面對大水槽</td><td><a href="https://www.google.com/maps/search/?api=1&query=カフェ+オーシャンブルー+美ら海水族館" target="_blank">📍</a></td><td>—</td></tr>
         <tr><td>ぎゅうとん合戦</td><td>5</td><td>晚</td><td>海景燒肉＋夕陽</td><td><a href="https://www.google.com/maps/search/?api=1&query=ぎゅうとん合戦+恩納村" target="_blank">📍</a></td><td><a href="https://tabelog.com/okinawa/A4703/A470303/47013003/" target="_blank">Tabelog</a></td></tr>
-        <tr><td>鳳梨公園園內</td><td>6</td><td>午</td><td>鳳梨料理</td><td>—</td><td>—</td></tr>
-        <tr><td>浜の家</td><td>6</td><td>晚</td><td>在地海鮮CP高</td><td><a href="https://www.google.com/maps/search/?api=1&query=浜の家+恩納村" target="_blank">📍</a></td><td><a href="https://tabelog.com/okinawa/A4703/A470303/47004643/" target="_blank">Tabelog</a></td></tr>
-        <tr><td>むら咲むら（妖怪咖啡）</td><td>7</td><td>晚</td><td>夜間活動內</td><td><a href="https://www.google.com/maps/search/?api=1&query=体験王国むら咲むら" target="_blank">📍</a></td><td>—</td></tr>
+        <tr><td>むら咲むら（妖怪咖啡）</td><td>6</td><td>晚</td><td>夜間活動內</td><td><a href="https://www.google.com/maps/search/?api=1&query=体験王国むら咲むら" target="_blank">📍</a></td><td>—</td></tr>
+        <tr><td>鳳梨公園園內</td><td>7</td><td>午</td><td>鳳梨料理</td><td>—</td><td>—</td></tr>
+        <tr><td>浜の家</td><td>7</td><td>晚</td><td>在地海鮮CP高</td><td><a href="https://www.google.com/maps/search/?api=1&query=浜の家+恩納村" target="_blank">📍</a></td><td><a href="https://tabelog.com/okinawa/A4703/A470303/47004643/" target="_blank">Tabelog</a></td></tr>
       </table>
     </div>
   </section>
@@ -482,10 +597,10 @@
         <tr><td>港川外人住宅街</td><td>4</td><td>散步/咖啡</td><td><a href="https://www.google.com/maps/search/?api=1&query=港川外人住宅街" target="_blank">📍</a></td></tr>
         <tr><td>美麗海水族館</td><td>5</td><td>水族館</td><td><a href="https://www.google.com/maps/search/?api=1&query=沖縄美ら海水族館" target="_blank">📍</a></td></tr>
         <tr><td>古宇利島</td><td>5</td><td>景觀/海灘</td><td><a href="https://www.google.com/maps/search/?api=1&query=古宇利大橋" target="_blank">📍</a></td></tr>
-        <tr><td>DINO恐竜PARK</td><td>6</td><td>恐龍主題</td><td><a href="https://www.google.com/maps/search/?api=1&query=DINO恐竜PARK+やんばる亜熱帯の森" target="_blank">📍</a></td></tr>
-        <tr><td>名護鳳梨公園</td><td>6</td><td>主題樂園</td><td><a href="https://www.google.com/maps/search/?api=1&query=ナゴパイナップルパーク" target="_blank">📍</a></td></tr>
-        <tr><td>ブセナ海中公園</td><td>7</td><td>海洋觀察</td><td><a href="https://www.google.com/maps/search/?api=1&query=ブセナ海中公園" target="_blank">📍</a></td></tr>
-        <tr><td>琉球妖怪 むら咲むら</td><td>7</td><td>夜間活動</td><td><a href="https://www.google.com/maps/search/?api=1&query=体験王国むら咲むら" target="_blank">📍</a></td></tr>
+        <tr><td>ブセナ海中公園</td><td>6</td><td>海洋觀察</td><td><a href="https://www.google.com/maps/search/?api=1&query=ブセナ海中公園" target="_blank">📍</a></td></tr>
+        <tr><td>琉球妖怪 むら咲むら</td><td>6</td><td>夜間活動</td><td><a href="https://www.google.com/maps/search/?api=1&query=体験王国むら咲むら" target="_blank">📍</a></td></tr>
+        <tr><td>DINO恐竜PARK</td><td>7</td><td>恐龍主題</td><td><a href="https://www.google.com/maps/search/?api=1&query=DINO恐竜PARK+やんばる亜熱帯の森" target="_blank">📍</a></td></tr>
+        <tr><td>名護鳳梨公園</td><td>7</td><td>主題樂園</td><td><a href="https://www.google.com/maps/search/?api=1&query=ナゴパイナップルパーク" target="_blank">📍</a></td></tr>
         <tr><td>那霸機場DFS免稅店</td><td>8</td><td>購物</td><td><a href="https://www.google.com/maps/search/?api=1&query=那覇空港" target="_blank">📍</a></td></tr>
       </table>
     </div>
@@ -511,6 +626,7 @@
 </div>
 
 <script>
+  // Nav active state
   const navLinks = document.querySelectorAll('.nav-tabs a');
   const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
@@ -523,6 +639,93 @@
     });
   }, { rootMargin: '-20% 0px -70% 0px' });
   document.querySelectorAll('[id]').forEach(section => observer.observe(section));
+
+  // Trip dates (JST)
+  const TRIP_START = new Date('2026-07-18T00:00:00+09:00');
+  const DAY_TITLES = ['抵達那霸','首里城＋南部','兒童王國＋美國村','港川＋恩納','水族館＋古宇利島','海中公園＋琉球妖怪','DINO＋鳳梨公園','還車＋機場'];
+
+  // Spots with GPS coordinates
+  const SPOTS = [
+    {name:'DMMかりゆし水族館', lat:26.2342, lng:127.6756, day:1},
+    {name:'國際通＋牧志市場', lat:26.2153, lng:127.6846, day:1},
+    {name:'首里城公園', lat:26.2170, lng:127.7195, day:2},
+    {name:'沖繩世界文化王國', lat:26.1400, lng:127.7475, day:2},
+    {name:'iias沖繩豐崎', lat:26.1593, lng:127.6583, day:2},
+    {name:'沖繩兒童王國', lat:26.3367, lng:127.7975, day:3},
+    {name:'美國村', lat:26.3264, lng:127.7577, day:3},
+    {name:'港川外人住宅街', lat:26.2614, lng:127.7167, day:4},
+    {name:'Hotel Monterey', lat:26.4413, lng:127.7726, day:4},
+    {name:'美麗海水族館', lat:26.6939, lng:127.8778, day:5},
+    {name:'古宇利島', lat:26.7033, lng:128.0175, day:5},
+    {name:'ブセナ海中公園', lat:26.5294, lng:127.8400, day:6},
+    {name:'むら咲むら', lat:26.4011, lng:127.7189, day:6},
+    {name:'DINO恐竜PARK', lat:26.6106, lng:127.9047, day:7},
+    {name:'名護鳳梨公園', lat:26.6083, lng:127.9031, day:7},
+    {name:'Toyota還車', lat:26.1936, lng:127.6567, day:8},
+    {name:'那霸機場', lat:26.2058, lng:127.6461, day:8},
+  ];
+
+  const params = new URLSearchParams(location.search);
+  const SIM_DAY = params.get('day') ? parseInt(params.get('day')) : null;
+  const SIM_LAT = params.get('lat') ? parseFloat(params.get('lat')) : null;
+  const SIM_LNG = params.get('lng') ? parseFloat(params.get('lng')) : null;
+
+  function getTodayDay() {
+    if (SIM_DAY) return SIM_DAY;
+    const now = new Date(new Date().toLocaleString('en-US', {timeZone:'Asia/Tokyo'}));
+    const diff = Math.floor((now - TRIP_START) / 86400000);
+    if (diff >= 0 && diff < 8) return diff + 1;
+    return null;
+  }
+
+  function highlightToday() {
+    const dayNum = getTodayDay();
+    if (!dayNum) return;
+    const banner = document.getElementById('today-banner');
+    banner.textContent = `📍 今天是 Day ${dayNum}：${DAY_TITLES[dayNum-1]}（點擊跳轉）`;
+    banner.classList.add('visible');
+    banner.onclick = () => document.getElementById('day'+dayNum).scrollIntoView({behavior:'smooth'});
+
+    const card = document.getElementById('day'+dayNum);
+    if (card) card.classList.add('today');
+  }
+
+  function getDistance(lat1, lng1, lat2, lng2) {
+    const R = 6371000;
+    const dLat = (lat2-lat1)*Math.PI/180;
+    const dLng = (lng2-lng1)*Math.PI/180;
+    const a = Math.sin(dLat/2)**2 + Math.cos(lat1*Math.PI/180)*Math.cos(lat2*Math.PI/180)*Math.sin(dLng/2)**2;
+    return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+  }
+
+  function showNearestSpot(pos) {
+    const {latitude, longitude} = pos.coords;
+    let nearest = null, minDist = Infinity;
+    SPOTS.forEach(s => {
+      const d = getDistance(latitude, longitude, s.lat, s.lng);
+      if (d < minDist) { minDist = d; nearest = s; }
+    });
+    if (nearest && minDist < 5000) {
+      const dayCard = document.getElementById('day'+nearest.day);
+      if (!dayCard) return;
+      let el = dayCard.querySelector('.nearest-spot');
+      if (!el) {
+        el = document.createElement('div');
+        el.className = 'nearest-spot';
+        dayCard.querySelector('.day-body').prepend(el);
+      }
+      const distText = minDist < 1000 ? Math.round(minDist)+'m' : (minDist/1000).toFixed(1)+'km';
+      el.innerHTML = `📍 你在 <strong>${nearest.name}</strong> 附近（${distText}）`;
+      el.classList.add('visible');
+    }
+  }
+
+  highlightToday();
+  if (SIM_LAT && SIM_LNG) {
+    showNearestSpot({coords:{latitude:SIM_LAT, longitude:SIM_LNG}});
+  } else if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showNearestSpot, ()=>{}, {enableHighAccuracy:true, timeout:10000});
+  }
 </script>
 
 </body>
