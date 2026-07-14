@@ -244,16 +244,31 @@
     .today-banner.visible { display: block; }
     .day-card.today { box-shadow: 0 0 0 3px var(--accent), var(--shadow); }
     .day-card.today .day-header { background: linear-gradient(135deg, #f77f00 0%, #fcbf49 100%); }
-    .nearest-spot {
-      display: none;
+    .timeline li.nearby {
       background: #e8f4fd;
-      border-left: 4px solid var(--primary);
-      padding: 0.5rem 1rem;
-      border-radius: 0 8px 8px 0;
-      margin-top: 0.75rem;
-      font-size: 0.9rem;
+      border-radius: 8px;
+      padding: 0.4rem 0.75rem;
+      box-shadow: 0 0 0 2px var(--primary-light);
     }
-    .nearest-spot.visible { display: block; }
+    .timeline li.nearby::before {
+      background: var(--accent);
+      box-shadow: 0 0 0 2px #fff3cd;
+      animation: pulse 1.5s infinite;
+    }
+    .nearby-badge {
+      display: inline-block;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-left: 0.5rem;
+    }
+    .timeline li.nearby .nearby-badge {
+      color: var(--primary);
+      font-weight: 600;
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.4); }
+    }
     @media (max-width: 600px) {
       .hero { padding: 3rem 1rem; }
       .hero h1 { font-size: 1.5rem; }
@@ -347,11 +362,11 @@
     <div class="day-body">
       <ul class="timeline">
         <li><span class="time">14:40</span><span class="activity">抵達那霸機場（JX 870）</span><a href="https://www.google.com/maps/search/?api=1&query=那覇空港" target="_blank">📍</a></li>
-        <li><span class="time">15:30</span><span class="activity">Toyota租車取車（搭接駁至店鋪）</span><span class="drive">接駁5分</span></li>
+        <li><span class="time">15:30</span><span class="activity">Toyota租車取車（搭接駁至店鋪）</span><span class="drive">接駁5分</span><a href="https://www.google.com/maps/search/?api=1&query=トヨタレンタカー+那覇空港+赤嶺2丁目15-11" target="_blank">📍</a></li>
         <li><span class="time">16:00</span><span class="activity"><strong>DMMかりゆし水族館</strong>（影像科技＋企鵝水獺互動）</span><span class="drive">車8分</span><a href="https://www.google.com/maps/search/?api=1&query=DMMかりゆし水族館" target="_blank">📍</a></li>
-        <li><span class="time">17:30</span><span class="activity">飯店check-in</span><span class="drive">車11分</span></li>
+        <li><span class="time">17:30</span><span class="activity">飯店check-in</span><span class="drive">車11分</span><a href="https://www.google.com/maps/search/?api=1&query=ネストホテル那覇久茂地" target="_blank">📍</a></li>
         <li><span class="time">18:00</span><span class="activity"><strong>國際通＋牧志市場</strong>（1樓買海鮮2樓代煮）</span><span class="drive">步行</span><a href="https://www.google.com/maps/search/?api=1&query=牧志公設市場" target="_blank">📍</a></li>
-        <li><span class="time">20:00</span><span class="activity">Blue Seal冰淇淋</span><a href="https://www.google.com/maps/search/?api=1&query=ブルーシール+国際通り店" target="_blank">📍</a></li>
+        <li><span class="time">20:00</span><span class="activity"><strong>Blue Seal冰淇淋</strong></span><a href="https://www.google.com/maps/search/?api=1&query=ブルーシール+国際通り店" target="_blank">📍</a></li>
       </ul>
       <div class="spot-gallery">
         <figure><img src="images/spot-dmm.jpg" alt="DMMかりゆし水族館"><figcaption>DMM水族館</figcaption></figure>
@@ -376,7 +391,7 @@
         <li><span class="time">12:00</span><span class="activity">午餐：<strong>ちょーでーぐぁ</strong>（高評價沖繩麵）</span><span class="drive">車14分</span><a href="https://www.google.com/maps/search/?api=1&query=ちょーでーぐぁ+西原町" target="_blank">📍</a></li>
         <li><span class="time">13:00</span><span class="activity"><strong>沖繩世界文化王國</strong>（鐘乳石洞、王國村、小動物）</span><span class="drive">車26分</span><a href="https://www.google.com/maps/search/?api=1&query=おきなわワールド" target="_blank">📍</a></li>
         <li><span class="time">15:30</span><span class="activity"><strong>iias沖繩豐崎＋Little Universe</strong>（彈跳床、充氣設施、微縮模型）</span><span class="drive">車25分</span><a href="https://www.google.com/maps/search/?api=1&query=イーアス沖縄豊崎" target="_blank">📍</a></li>
-        <li><span class="time">17:30</span><span class="activity">晚餐：iias美食街</span></li>
+        <li><span class="time">17:30</span><span class="activity">晚餐：iias美食街</span><a href="https://www.google.com/maps/search/?api=1&query=イーアス沖縄豊崎" target="_blank">📍</a></li>
         <li><span class="time">18:30</span><span class="activity">回飯店</span><span class="drive">車15分</span></li>
       </ul>
       <div class="spot-gallery">
@@ -426,7 +441,7 @@
         <li><span class="time">10:00</span><span class="activity"><strong>港川外人住宅街</strong>（雜貨咖啡＋oHacorte水果塔）</span><span class="drive">車14分</span><a href="https://www.google.com/maps/search/?api=1&query=港川外人住宅街" target="_blank">📍</a></li>
         <li><span class="time">12:00</span><span class="activity">往恩納（車上補眠）</span><span class="drive">車40分</span></li>
         <li><span class="time">12:40</span><span class="activity">Check-in Hotel Monterey</span><a href="https://www.google.com/maps/search/?api=1&query=ホテルモントレ沖縄スパ%26リゾート" target="_blank">📍</a></li>
-        <li><span class="time">13:00</span><span class="activity"><strong>飯店泳池＋海灘＋兒童戲水區</strong></span></li>
+        <li><span class="time">13:00</span><span class="activity"><strong>飯店泳池＋海灘＋兒童戲水區</strong></span><a href="https://www.google.com/maps/search/?api=1&query=ホテルモントレ沖縄スパ%26リゾート" target="_blank">📍</a></li>
         <li><span class="time">18:00</span><span class="activity">晚餐：<strong>ぎゅうとん合戦</strong>（海景燒肉＋夕陽）</span><span class="drive">步行1分</span><a href="https://www.google.com/maps/search/?api=1&query=ぎゅうとん合戦+恩納村" target="_blank">📍</a></li>
       </ul>
       <div class="spot-gallery">
@@ -451,10 +466,10 @@
         <li><span class="time">10:00</span><span class="activity">出發往北（車上補眠）</span><span class="drive">車82分</span></li>
         <li><span class="time">11:25</span><span class="activity"><strong>美麗海水族館</strong>（黑潮之海、觸摸池、海龜館）</span><a href="https://www.google.com/maps/search/?api=1&query=沖縄美ら海水族館" target="_blank">📍</a></li>
         <li><span class="time">13:30</span><span class="activity">海豚表演（免費）</span><span class="drive">步行5分</span><a href="https://www.google.com/maps/search/?api=1&query=オキちゃん劇場" target="_blank">📍</a></li>
-        <li><span class="time">14:00</span><span class="activity">午餐：<strong>Cafe Ocean Blue</strong>（面對大水槽邊吃邊看）</span></li>
+        <li><span class="time">14:00</span><span class="activity">午餐：<strong>Cafe Ocean Blue</strong>（面對大水槽邊吃邊看）</span><a href="https://www.google.com/maps/search/?api=1&query=カフェ+オーシャンブルー+美ら海水族館" target="_blank">📍</a></li>
         <li><span class="time">14:30</span><span class="activity"><strong>古宇利島</strong>（大橋絕景＋海灘＋Heart Rock）</span><span class="drive">車17分</span><a href="https://www.google.com/maps/search/?api=1&query=古宇利大橋" target="_blank">📍</a></li>
         <li><span class="time">16:00</span><span class="activity">回恩納</span><span class="drive">車65分</span></li>
-        <li><span class="time">17:05</span><span class="activity">飯店泳池</span></li>
+        <li><span class="time">17:05</span><span class="activity">飯店泳池</span><a href="https://www.google.com/maps/search/?api=1&query=ホテルモントレ沖縄スパ%26リゾート" target="_blank">📍</a></li>
         <li><span class="time">18:30</span><span class="activity">晚餐：<strong>ぎゅうとん合戦</strong>（海景燒肉＋夕陽）</span><span class="drive">步行1分</span><a href="https://www.google.com/maps/search/?api=1&query=ぎゅうとん合戦+恩納村" target="_blank">📍</a></li>
       </ul>
       <div class="spot-gallery">
@@ -478,9 +493,9 @@
       <ul class="timeline">
         <li><span class="time">10:00</span><span class="activity"><strong>ブセナ海中公園</strong>（海中展望塔＋玻璃船）</span><span class="drive">車22分</span><a href="https://www.google.com/maps/search/?api=1&query=ブセナ海中公園" target="_blank">📍</a></li>
         <li><span class="time">12:00</span><span class="activity">回飯店</span><span class="drive">車22分</span></li>
-        <li><span class="time">12:30</span><span class="activity">飯店午餐＋泳池＋海灘</span></li>
+        <li><span class="time">12:30</span><span class="activity">飯店午餐＋泳池＋海灘</span><a href="https://www.google.com/maps/search/?api=1&query=ホテルモントレ沖縄スパ%26リゾート" target="_blank">📍</a></li>
         <li><span class="time">17:30</span><span class="activity"><strong>琉球妖怪 むら咲むら</strong>（投影、蓋章拉力、妖怪咖啡）</span><span class="drive">車16分</span><a href="https://www.google.com/maps/search/?api=1&query=体験王国むら咲むら" target="_blank">📍</a></li>
-        <li><span class="time">19:00</span><span class="activity">晚餐：園內妖怪咖啡</span></li>
+        <li><span class="time">19:00</span><span class="activity">晚餐：園內妖怪咖啡</span><a href="https://www.google.com/maps/search/?api=1&query=体験王国むら咲むら" target="_blank">📍</a></li>
         <li><span class="time">20:30</span><span class="activity">回飯店</span><span class="drive">車16分</span></li>
       </ul>
       <div class="spot-gallery">
@@ -505,9 +520,9 @@
         <li><span class="time">10:00</span><span class="activity">出發往名護（車上補眠）</span><span class="drive">車58分</span></li>
         <li><span class="time">11:00</span><span class="activity"><strong>DINO恐竜PARK</strong>（亞熱帶森林＋80隻等身大恐龍）</span><a href="https://www.google.com/maps/search/?api=1&query=DINO恐竜PARK+やんばる亜熱帯の森" target="_blank">📍</a></li>
         <li><span class="time">12:00</span><span class="activity"><strong>名護鳳梨公園</strong>（自動駕駛車遊園＋試吃鳳梨甜點）</span><span class="drive">車2分</span><a href="https://www.google.com/maps/search/?api=1&query=ナゴパイナップルパーク" target="_blank">📍</a></li>
-        <li><span class="time">13:30</span><span class="activity">園內午餐（鳳梨料理）</span></li>
+        <li><span class="time">13:30</span><span class="activity">園內午餐（鳳梨料理）</span><a href="https://www.google.com/maps/search/?api=1&query=ナゴパイナップルパーク" target="_blank">📍</a></li>
         <li><span class="time">14:00</span><span class="activity">回恩納（車上補眠）</span><span class="drive">車60分</span></li>
-        <li><span class="time">15:00</span><span class="activity"><strong>飯店泳池＋海灘</strong>（最後一個下午）</span></li>
+        <li><span class="time">15:00</span><span class="activity"><strong>飯店泳池＋海灘</strong>（最後一個下午）</span><a href="https://www.google.com/maps/search/?api=1&query=ホテルモントレ沖縄スパ%26リゾート" target="_blank">📍</a></li>
         <li><span class="time">18:30</span><span class="activity">晚餐：<strong>浜の家</strong>（在地海鮮，CP值高）</span><span class="drive">車1分</span><a href="https://www.google.com/maps/search/?api=1&query=浜の家+恩納村" target="_blank">📍</a></li>
       </ul>
       <div class="spot-gallery">
@@ -532,7 +547,7 @@
         <li><span class="time">09:30</span><span class="activity">退房出發往南</span></li>
         <li><span class="time">10:25</span><span class="activity">加滿油（<a href="https://www.google.com/maps/search/?api=1&query=ENEOS+那覇市赤嶺2丁目" target="_blank">ENEOS赤嶺📍</a>）→ <a href="https://www.google.com/maps/search/?api=1&query=トヨタレンタカー+那覇空港+赤嶺2丁目15-11" target="_blank">Toyota還車📍</a></span><span class="drive">車55分</span></li>
         <li><span class="time">11:00</span><span class="activity">搭接駁至機場國際線</span><span class="drive">接駁5分</span></li>
-        <li><span class="time">11:15</span><span class="activity">機場午餐＋check-in＋DFS免稅店購物</span></li>
+        <li><span class="time">11:15</span><span class="activity">機場午餐＋check-in＋DFS免稅店購物</span><a href="https://www.google.com/maps/search/?api=1&query=那覇空港" target="_blank">📍</a></li>
         <li><span class="time">15:50</span><span class="activity">JX 871 起飛</span></li>
         <li><span class="time">16:25</span><span class="activity">抵達桃園機場 (UTC+8)</span></li>
       </ul>
@@ -646,32 +661,50 @@
 
   // Spots with GPS coordinates
   const SPOTS = [
+    {name:'抵達那霸機場', lat:26.2058, lng:127.6461, day:1},
+    {name:'Toyota租車取車', lat:26.1936, lng:127.6567, day:1},
     {name:'DMMかりゆし水族館', lat:26.2342, lng:127.6756, day:1},
+    {name:'飯店check-in', lat:26.2185, lng:127.6840, day:1},
     {name:'國際通＋牧志市場', lat:26.2153, lng:127.6846, day:1},
+    {name:'Blue Seal', lat:26.2155, lng:127.6850, day:1},
     {name:'首里城公園', lat:26.2170, lng:127.7195, day:2},
+    {name:'ちょーでーぐぁ', lat:26.2380, lng:127.7640, day:2},
     {name:'沖繩世界文化王國', lat:26.1400, lng:127.7475, day:2},
     {name:'iias沖繩豐崎', lat:26.1593, lng:127.6583, day:2},
     {name:'沖繩兒童王國', lat:26.3367, lng:127.7975, day:3},
+    {name:'Steak House 88', lat:26.3342, lng:127.7717, day:3},
     {name:'美國村', lat:26.3264, lng:127.7577, day:3},
+    {name:'北谷ダイニング', lat:26.3250, lng:127.7560, day:3},
     {name:'港川外人住宅街', lat:26.2614, lng:127.7167, day:4},
     {name:'Hotel Monterey', lat:26.4413, lng:127.7726, day:4},
+    {name:'ぎゅうとん合戦', lat:26.4420, lng:127.7720, day:4},
+    {name:'ぎゅうとん合戦', lat:26.4420, lng:127.7720, day:5},
     {name:'美麗海水族館', lat:26.6939, lng:127.8778, day:5},
+    {name:'Cafe Ocean Blue', lat:26.6939, lng:127.8778, day:5},
     {name:'古宇利島', lat:26.7033, lng:128.0175, day:5},
     {name:'ブセナ海中公園', lat:26.5294, lng:127.8400, day:6},
     {name:'むら咲むら', lat:26.4011, lng:127.7189, day:6},
     {name:'DINO恐竜PARK', lat:26.6106, lng:127.9047, day:7},
     {name:'名護鳳梨公園', lat:26.6083, lng:127.9031, day:7},
+    {name:'浜の家', lat:26.4400, lng:127.7710, day:7},
     {name:'Toyota還車', lat:26.1936, lng:127.6567, day:8},
-    {name:'那霸機場', lat:26.2058, lng:127.6461, day:8},
+    {name:'機場午餐', lat:26.2058, lng:127.6461, day:8},
   ];
 
   const params = new URLSearchParams(location.search);
   const SIM_DAY = params.get('day') ? parseInt(params.get('day')) : null;
+  const SIM_DATE = params.get('date') || null;
   const SIM_LAT = params.get('lat') ? parseFloat(params.get('lat')) : null;
   const SIM_LNG = params.get('lng') ? parseFloat(params.get('lng')) : null;
 
   function getTodayDay() {
     if (SIM_DAY) return SIM_DAY;
+    if (SIM_DATE) {
+      const simulated = new Date(SIM_DATE + 'T00:00:00+09:00');
+      const diff = Math.floor((simulated - TRIP_START) / 86400000);
+      if (diff >= 0 && diff < 8) return diff + 1;
+      return null;
+    }
     const now = new Date(new Date().toLocaleString('en-US', {timeZone:'Asia/Tokyo'}));
     const diff = Math.floor((now - TRIP_START) / 86400000);
     if (diff >= 0 && diff < 8) return diff + 1;
@@ -700,24 +733,33 @@
 
   function showNearestSpot(pos) {
     const {latitude, longitude} = pos.coords;
-    let nearest = null, minDist = Infinity;
+    let closestSpot = null, closestDist = Infinity;
     SPOTS.forEach(s => {
       const d = getDistance(latitude, longitude, s.lat, s.lng);
-      if (d < minDist) { minDist = d; nearest = s; }
+      if (d < closestDist) { closestDist = d; closestSpot = s; }
     });
-    if (nearest && minDist < 5000) {
-      const dayCard = document.getElementById('day'+nearest.day);
-      if (!dayCard) return;
-      let el = dayCard.querySelector('.nearest-spot');
-      if (!el) {
-        el = document.createElement('div');
-        el.className = 'nearest-spot';
-        dayCard.querySelector('.day-body').prepend(el);
-      }
-      const distText = minDist < 1000 ? Math.round(minDist)+'m' : (minDist/1000).toFixed(1)+'km';
-      el.innerHTML = `📍 你在 <strong>${nearest.name}</strong> 附近（${distText}）`;
-      el.classList.add('visible');
-    }
+    if (!closestSpot || closestDist >= 5000) return;
+    const sameDaySpots = SPOTS.filter(s => s.day === closestSpot.day);
+    const dayCard = document.getElementById('day'+closestSpot.day);
+    if (!dayCard) return;
+    const items = dayCard.querySelectorAll('.timeline li');
+    sameDaySpots.forEach(s => {
+      const d = getDistance(latitude, longitude, s.lat, s.lng);
+      const distText = d < 1000 ? Math.round(d)+'m' : (d/1000).toFixed(1)+'km';
+      items.forEach(li => {
+        if (li.textContent.includes(s.name)) {
+          const badge = document.createElement('span');
+          badge.className = 'nearby-badge';
+          if (s === closestSpot) {
+            badge.textContent = `← 你在這附近 (${distText})`;
+            li.classList.add('nearby');
+          } else {
+            badge.textContent = `(${distText})`;
+          }
+          li.appendChild(badge);
+        }
+      });
+    });
   }
 
   highlightToday();
@@ -726,6 +768,17 @@
   } else if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(showNearestSpot, ()=>{}, {enableHighAccuracy:true, timeout:10000});
   }
+
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      const dayNum = getTodayDay();
+      if (dayNum) {
+        document.getElementById('day'+dayNum).scrollIntoView({behavior:'smooth'});
+      } else {
+        document.getElementById('info').scrollIntoView({behavior:'smooth'});
+      }
+    }, 100);
+  });
 </script>
 
 </body>
